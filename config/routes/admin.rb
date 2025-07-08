@@ -20,7 +20,7 @@ namespace :admin do
                                  { rack_protection: { except: %i[authenticity_token form_token json_csrf
                                                                  remote_token http_origin session_hijacking] } })
     mount flipper_ui, at: "feature_flags"
-    mount PgHero::Engine, at: "pghero"
+    # mount PgHero::Engine, at: "pghero" # temporarily commented out due to pghero gem being disabled
   end
 
   resources :organization_memberships, only: %i[update destroy create]

@@ -75,9 +75,9 @@ gem "omniauth-rails_csrf_protection", "~> 1.0" # Provides CSRF protection on Omn
 gem "omniauth-twitter", "~> 1.4" # OmniAuth strategy for Twitter
 gem "parallel", "~> 1.22" # Run any kind of code in parallel processes
 gem "pg", "~> 1.4" # Pg is the Ruby interface to the PostgreSQL RDBMS
-gem "pg_query", ">= 0.9.0" # Allows PGHero to analyze queries
+# gem "pg_query", ">= 0.9.0" # Allows PGHero to analyze queries - temporarily commented out due to compilation issues
 gem "pg_search", "~> 2.3.6" # PgSearch builds Active Record named scopes that take advantage of PostgreSQL's full text search
-gem "pghero", "~> 3.6" # Dashboard for Postgres
+# gem "pghero", "~> 3.6" # Dashboard for Postgres - temporarily commented out due to pg_query dependency
 gem "puma", "~> 5.6.4" # Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server
 gem "pundit", "~> 2.2" # Object oriented authorization for Rails applications
 gem "public_suffix", "~> 6.0" # Domain name parser based on the Public Suffix List
