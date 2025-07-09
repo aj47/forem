@@ -486,7 +486,7 @@ end
 
 ##############################################################################
 
-seeder.create_if_none(ListingCategory) do
+seeder.create_if_none(ClassifiedListingCategory) do
   categories = [
     {
       slug: "cfp",
@@ -526,7 +526,7 @@ seeder.create_if_none(ListingCategory) do
     },
   ].freeze
 
-  categories.each { |attributes| ListingCategory.create(attributes) }
+  categories.each { |attributes| ClassifiedListingCategory.create(attributes) }
 end
 
 ##############################################################################
@@ -536,22 +536,22 @@ seeder.create_if_none(Listing) do
   users_in_random_order.each { |user| Credit.add_to(user, rand(100)) }
   users = users_in_random_order.to_a
 
-  listings_categories = ListingCategory.ids
+  listings_categories = ClassifiedListingCategory.ids
   listings_categories.each.with_index(1) do |category_id, index|
     # rotate users if they are less than the categories
     user = users.at(index % users.length)
     2.times do
       Listing.create!(
-        user: user,
+        user_id: user.id,
         title: Faker::Lorem.sentence,
         body_markdown: Faker::Markdown.random.lines.take(10).join,
         location: Faker::Address.city,
         organization_id: user.organizations.first&.id,
-        listing_category_id: category_id,
+        classified_listing_category_id: category_id,
         published: true,
         originally_published_at: Time.current,
         bumped_at: Time.current,
-        tag_list: Tag.order(Arel.sql("RANDOM()")).first(2).pluck(:name),
+        cached_tag_list: Tag.order(Arel.sql("RANDOM()")).first(2).pluck(:name).join(", "),
       )
     end
   end
