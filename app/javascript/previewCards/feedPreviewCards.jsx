@@ -6,6 +6,7 @@ import {
   getDropdownRepositionListener,
 } from '@utilities/dropdownUtils';
 import { request } from '@utilities/http/request';
+import { initializeArticlePreviewCards, listenForHoveredOrFocusedArticleCards } from './articlePreviewCards';
 
 const cachedAuthorMetadata = {};
 
@@ -64,6 +65,9 @@ export function listenForHoveredOrFocusedStoryCards() {
 
   mainContent.addEventListener('mouseover', checkForPreviewCardDetails);
   mainContent.addEventListener('focusin', checkForPreviewCardDetails);
+
+  // Also initialize article preview cards
+  listenForHoveredOrFocusedArticleCards();
 }
 
 export function initializeFeedPreviewCards() {
@@ -93,6 +97,7 @@ const observer = new MutationObserver((mutationsList) => {
   mutationsList.forEach((mutation) => {
     if (mutation.type === 'childList') {
       initializeFeedPreviewCards();
+      initializeArticlePreviewCards();
     }
   });
 });

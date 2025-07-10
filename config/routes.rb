@@ -196,6 +196,7 @@ Rails.application.routes.draw do
     resources :article_approvals, only: %i[create]
     resources :sidebars, only: %i[show]
     resources :profile_preview_cards, only: %i[show]
+    resources :article_preview_cards, only: %i[show]
     resources :user_subscriptions, only: %i[create] do
       collection do
         get "/subscribed", action: "subscribed"

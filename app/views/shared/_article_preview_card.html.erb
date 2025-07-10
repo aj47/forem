@@ -1,0 +1,76 @@
+<div id="<%= id %>" class="article-preview-card__content p-4 pt-0 branded-7 crayons-dropdown" data-testid="article-preview-card" data-repositioning-dropdown="true">
+  <div class="gap-4 grid">
+    <div class="-mt-4">
+      <a href="<%= article.url %>" class="flex">
+        <% if article.main_image.present? %>
+          <div class="mr-3 shrink-0">
+            <img src="<%= cloud_cover_url(article.main_image) %>" alt="<%= article.title %>" class="crayons-avatar crayons-avatar--xl" width="64" height="64" style="object-fit: cover; border-radius: var(--radius);">
+          </div>
+        <% end %>
+        <div class="flex-1 min-w-0">
+          <h3 class="fs-l fw-bold mb-1 color-base-100 line-clamp-2">
+            <%= article.title %>
+          </h3>
+          <% if article.description.present? %>
+            <p class="color-base-70 fs-s mb-2 line-clamp-2">
+              <%= truncate(article.description, length: 120) %>
+            </p>
+          <% end %>
+        </div>
+      </a>
+    </div>
+    
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <a href="/<%= article.user.username %>" class="flex items-center gap-2 color-base-70 hover:color-base-100">
+          <img src="<%= article.user.profile_image_90 %>" alt="<%= article.user.name %>" class="crayons-avatar crayons-avatar--s" width="24" height="24">
+          <span class="fs-s fw-medium"><%= article.user.name %></span>
+        </a>
+        <% if article.organization %>
+          <span class="color-base-60">for</span>
+          <a href="/<%= article.organization.slug %>" class="flex items-center gap-1 color-base-70 hover:color-base-100">
+            <img src="<%= article.organization.profile_image_90 %>" alt="<%= article.organization.name %>" class="crayons-avatar crayons-avatar--s" width="20" height="20">
+            <span class="fs-s"><%= article.organization.name %></span>
+          </a>
+        <% end %>
+      </div>
+      <div class="flex items-center gap-3 color-base-60 fs-xs">
+        <span><%= time_ago_in_words(article.published_at) %> ago</span>
+        <span><%= article.reading_time %> min read</span>
+      </div>
+    </div>
+    
+    <% if article.cached_tag_list_array.any? %>
+      <div class="flex flex-wrap gap-1">
+        <% article.cached_tag_list_array.first(3).each do |tag| %>
+          <a href="/t/<%= tag %>" class="crayons-tag crayons-tag--monochrome crayons-tag--s">
+            <span class="crayons-tag__prefix">#</span><%= tag %>
+          </a>
+        <% end %>
+        <% if article.cached_tag_list_array.length > 3 %>
+          <span class="color-base-60 fs-xs">+<%= article.cached_tag_list_array.length - 3 %> more</span>
+        <% end %>
+      </div>
+    <% end %>
+    
+    <div class="flex items-center justify-between pt-2 border-t border-base-20">
+      <div class="flex items-center gap-3 color-base-60 fs-s">
+        <span class="flex items-center gap-1">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="crayons-icon">
+            <path d="M18.884 12.595l.01.011L12 19.5l-6.894-6.894.01-.01A4.875 4.875 0 0112 5.73a4.875 4.875 0 016.884 6.865z"/>
+          </svg>
+          <%= article.public_reactions_count %>
+        </span>
+        <span class="flex items-center gap-1">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="crayons-icon">
+            <path d="M10.5 5h3a6 6 0 110 12v2.625c-3.75-1.5-9-3.75-9-8.625a6 6 0 016-6z"/>
+          </svg>
+          <%= article.comments_count %>
+        </span>
+      </div>
+      <a href="<%= article.url %>" class="crayons-btn crayons-btn--secondary crayons-btn--s">
+        Read more
+      </a>
+    </div>
+  </div>
+</div>

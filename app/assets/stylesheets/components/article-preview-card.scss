@@ -1,0 +1,71 @@
+.article-preview-card {
+  --dropdown-hover-delay: 590ms;
+  --dropdown-transition: 300ms;
+
+  &__content.crayons-dropdown {
+    transition: border, border-top;
+    transition-duration: var(--dropdown-transition);
+    color: var(--base-100);
+    padding-top: 0;
+    left: 0;
+    font-size: var(--fs-base);
+    font-weight: var(--fw-normal);
+    min-width: 320px;
+    max-width: 400px;
+    width: max-content;
+
+    // overflow-wrap: anywhere isn't supported in Safari, in which case this fallback applies
+    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  &__content.crayons-dropdown:hover {
+    display: block;
+    animation: hoverAppear var(--dropdown-hover-delay);
+
+    &.showing {
+      animation: none;
+    }
+  }
+
+  &__trigger:hover + .article-preview-card__content.crayons-dropdown {
+    display: block;
+    animation: hoverAppear var(--dropdown-hover-delay);
+
+    &.showing {
+      animation: none;
+    }
+  }
+
+  @keyframes hoverAppear {
+    0% {
+      opacity: var(--opacity-0);
+      pointer-events: none;
+    }
+
+    99% {
+      opacity: var(--opacity-0);
+      pointer-events: none;
+    }
+
+    100% {
+      opacity: var(--opacity-100);
+      pointer-events: unset;
+    }
+  }
+}
+
+// Line clamp utility classes for article preview
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

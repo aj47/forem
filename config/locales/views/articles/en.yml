@@ -64,6 +64,7 @@ en:
         zero: New Discussion!
         one: '#discuss <img src="%{image}" />%{count}'
         other: '#discuss <img src="%{image}" />%{count}'
+      preview: "Preview article: %{title}"
       save:
         title: "Save post %{title} to reading list"
         aria_label: "Save post %{title} to reading list"
